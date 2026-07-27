@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chapman Auto | Driven by Trust</title>
+  <title>Chapman Auto | Driven by Trust - Global & Local Car Imports</title>
   
+  <!-- Google Fonts: Poppins & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -21,135 +24,217 @@
       --bg-light: #F8FAFC;
       --bg-white: #FFFFFF;
       --border-color: #E2E8F0;
+      
       --font-heading: 'Poppins', sans-serif;
       --font-body: 'Inter', sans-serif;
-      --radius-card: 12px;
-      --radius-btn: 8px;
+      
+      --radius-card: 16px;
+      --radius-btn: 10px;
+      
       --shadow-soft: 0 4px 20px rgba(11, 31, 58, 0.06);
+      --shadow-hover: 0 12px 30px rgba(11, 31, 58, 0.15);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--font-body); color: var(--text-main); background-color: var(--bg-light); line-height: 1.6; }
-    h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--primary-dark); }
+    body { font-family: var(--font-body); color: var(--text-main); background-color: var(--bg-white); line-height: 1.6; }
+    h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--primary-dark); font-weight: 700; }
     a { text-decoration: none; color: inherit; }
     .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
     .page-section { display: none; padding: 40px 0 80px; min-height: 80vh; }
     .page-section.active-page { display: block; }
+    .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 12px; }
+    .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 48px; font-size: 1.05rem; }
+
+    /* Buttons */
+    .btn {
+      font-family: var(--font-heading); font-weight: 600; font-size: 0.90rem;
+      padding: 12px 24px; border-radius: var(--radius-btn); border: 2px solid transparent;
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      transition: var(--transition); text-decoration: none;
+    }
+    .btn-primary { background-color: var(--accent-red); color: var(--bg-white); }
+    .btn-primary:hover { background-color: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(215, 38, 56, 0.3); }
+    .btn-secondary { background-color: var(--bg-white); border-color: var(--primary-dark); color: var(--primary-dark); }
+    .btn-secondary:hover { background-color: var(--primary-dark); color: var(--bg-white); }
+    .btn-dl { background-color: #10B981; color: white; padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; cursor: pointer; border: none; font-family: var(--font-heading); font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-dl:hover { background-color: #059669; }
+
+    /* Logo */
+    .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+    .logo-emblem {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-dark) 60%, var(--accent-red));
+      border: 2px solid var(--silver-accent);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-family: var(--font-heading); font-weight: 800; font-size: 1.4rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative;
+    }
+    .logo-emblem::after {
+      content: ''; position: absolute; width: 28px; height: 28px;
+      border: 2px dashed var(--silver-accent); border-radius: 50%;
+    }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-wordmark { font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; color: var(--primary-dark); line-height: 1; }
+    .logo-wordmark span { color: var(--accent-red); }
+    .logo-tagline { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-top: 3px; }
 
     /* Navbar */
     .navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      padding: 16px 0; transition: background 0.3s, color 0.3s, border-bottom 0.3s;
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+      z-index: 1000; border-bottom: 1px solid var(--border-color); height: 80px;
     }
-    .navbar.hero-nav { background: transparent; border-bottom: none; }
-    .navbar.default-nav { background: rgba(255, 255, 255, 0.98); border-bottom: 1px solid var(--border-color); }
     .nav-container { display: flex; align-items: center; justify-content: space-between; height: 100%; }
-    .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
-    .logo-emblem {
-      width: 40px; height: 40px; border-radius: 50%; background: var(--primary-dark);
-      display: flex; align-items: center; justify-content: center; color: white; font-weight: 800;
-    }
-    .logo-wordmark { font-family: var(--font-heading); font-weight: 800; font-size: 1.2rem; color: var(--primary-dark); }
-    .logo-wordmark span { color: var(--accent-red); }
-    .nav-links { display: flex; gap: 24px; list-style: none; font-weight: 500; font-size: 0.95rem; align-items: center; }
-    .nav-links a { cursor: pointer; transition: color 0.2s; color: var(--text-main); display: inline-flex; align-items: center; gap: 8px; }
-    .nav-links a i { font-size: 0.9rem; }
-    .navbar.hero-nav .nav-links a { color: white; }
-    .navbar.hero-nav .logo-wordmark { color: white; }
-    .nav-links a:hover, .nav-links a.active-nav { color: var(--accent-red); }
+    .nav-links { display: flex; gap: 28px; list-style: none; font-weight: 500; font-size: 0.95rem; }
+    .nav-links a { cursor: pointer; transition: var(--transition); }
+    .nav-links a:hover, .nav-links a.active-nav { color: var(--accent-red); font-weight: 600; }
 
-    /* Filter Section */
-    .filter-wrapper {
-      margin-top: 100px; background: var(--bg-white); border: 1px solid var(--border-color);
-      border-radius: var(--radius-card); padding: 24px; box-shadow: var(--shadow-soft); margin-bottom: 32px;
+    /* Hero Banner */
+    .hero {
+      margin-top: 80px; padding: 120px 0 140px;
+      background: linear-gradient(rgba(11, 31, 58, 0.88), rgba(11, 31, 58, 0.92)), 
+                url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80') center/cover;
+      color: white; text-align: center;
     }
-    .filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) 140px; gap: 16px; align-items: end; }
+    .hero-content { max-width: 850px; margin: 0 auto; }
+    .hero h1 { font-size: 3.5rem; color: white; margin-bottom: 20px; line-height: 1.15; }
+    .hero p { font-size: 1.25rem; color: var(--silver-accent); margin-bottom: 32px; }
+
+    /* Search Section */
+    .search-card {
+      background: var(--bg-white); border-radius: var(--radius-card); padding: 32px;
+      box-shadow: 0 10px 40px rgba(11, 31, 58, 0.12); border: 1px solid var(--border-color); margin-bottom: 40px;
+    }
+    .search-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); }
+    .search-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; align-items: end; }
     .filter-group { display: flex; flex-direction: column; gap: 6px; }
-    .filter-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary-dark); }
+    .filter-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary-dark); letter-spacing: 0.5px; }
     .form-control {
-      width: 100%; padding: 10px 12px; border: 1px solid var(--border-color);
-      border-radius: 6px; font-family: var(--font-body); font-size: 0.9rem; background: var(--bg-light); outline: none;
+      width: 100%; padding: 12px 14px; border: 1px solid var(--border-color);
+      border-radius: 8px; font-family: var(--font-body); font-size: 0.9rem; outline: none; background-color: var(--bg-light); color: var(--text-main);
     }
     .form-control:focus { border-color: var(--primary-dark); background: white; }
-    .btn {
-      font-family: var(--font-heading); font-weight: 600; padding: 10px 20px;
-      border-radius: var(--radius-btn); border: none; cursor: pointer; text-align: center; display: inline-flex;
-      align-items: center; justify-content: center; gap: 8px; transition: background 0.2s;
-    }
-    .btn-primary { background-color: var(--accent-red); color: white; width: 100%; }
-    .btn-primary:hover { background-color: var(--accent-hover); }
-    .btn-outlined {
-      background: transparent; color: white; border: 1px solid rgba(255,255,255,0.9);
-      width: auto; padding: 10px 22px;
-    }
-    .btn-outlined:hover { background: rgba(255,255,255,0.1); }
-    .btn-secondary { border: 1px solid var(--border-color); background: white; color: var(--primary-dark); }
-    .btn-danger { background-color: #EF4444; color: white; padding: 6px 12px; font-size: 0.8rem; }
-    .btn-danger:hover { background-color: #DC2626; }
+    .search-actions { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px; padding-top: 16px; border-top: 1px solid var(--border-color); }
 
-    /* Homepage Hero */
-    .hero { position: relative; min-height: 90vh; display: flex; align-items: center; }
-    .hero-overlay { position: absolute; inset: 0; background: rgba(11, 31, 58, 0.78); }
-    .hero { background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600'); background-size: cover; background-position: center; }
-    .hero-content { position: relative; padding: 140px 24px 80px; max-width: 780px; color: white; }
-    .hero-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; }
-    .hero-logo { width: 50px; height: 50px; border-radius: 12px; font-size: 1.2rem; }
-    .hero-tagline { margin: 0; color: rgba(255,255,255,0.75); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
-    .hero-content h1 { font-size: clamp(2.8rem, 5vw, 4.2rem); line-height: 1.02; margin-bottom: 24px; }
-    .hero-copy { max-width: 680px; font-size: 1rem; color: rgba(255,255,255,0.9); margin-bottom: 34px; }
-    .hero-buttons { display: flex; flex-wrap: wrap; gap: 16px; }
-    .hero-buttons .btn i { margin-right: 8px; }
-    .home-section { padding: 80px 0; }
-    .section-title { font-size: 2rem; max-width: 720px; margin: 0 auto 24px; text-align: center; }
-    .section-copy { color: var(--text-muted); max-width: 680px; margin: 0 auto 28px; text-align: center; }
-    .brand-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
-    .brand-card { background: white; border-radius: var(--radius-card); padding: 22px 16px; text-align: center; font-weight: 700; color: var(--primary-dark); box-shadow: var(--shadow-soft); }
-    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
-    .feature-card { background: white; border-radius: var(--radius-card); padding: 24px; box-shadow: var(--shadow-soft); }
-    .feature-card h3 { margin-bottom: 10px; }
-    .testimonial-author { margin-top: 12px; color: var(--text-muted); font-size: 0.9rem; }
-    .hero-contact { margin-top: 14px; color: rgba(255,255,255,0.85); font-size: 0.95rem; }
-    .hero-contact a { color: #F8FAFC; text-decoration: underline; }
-    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-top: 24px; }
-    .contact-card { background: white; border-radius: var(--radius-card); padding: 22px; box-shadow: var(--shadow-soft); min-height: 170px; }
-    .contact-card a { color: var(--primary-dark); font-weight: 600; }
-    .faq-grid { display: grid; gap: 16px; }
-    .faq-item { background: white; padding: 24px; border-radius: var(--radius-card); box-shadow: var(--shadow-soft); }
-    .contact-form { margin-top: 32px; background: white; border-radius: var(--radius-card); padding: 24px; box-shadow: var(--shadow-soft); }
-    .contact-form .filter-label { margin-bottom: 8px; }
-    .footer { background: var(--primary-dark); color: white; padding: 40px 0; }
-    .footer a { color: rgba(255,255,255,0.85); }
-    .footer a:hover { color: white; }
-    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
-    .footer-grid h4 { margin-bottom: 16px; }
-    .footer-copy { color: rgba(255,255,255,0.72); line-height: 1.8; }
-    #brands, #why-us, #services, #testimonials, #request-quote, #faq, #contact { scroll-margin-top: 100px; }
-
-    /* Vehicle Grid */
-    .vehicle-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+    /* Vehicle Cards */
+    .vehicle-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
     .vehicle-card {
       background: var(--bg-white); border-radius: var(--radius-card); border: 1px solid var(--border-color);
-      overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-soft);
+      overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-soft); transition: var(--transition);
     }
-    .card-img-wrap { height: 200px; background: #000; position: relative; }
-    .card-img { width: 100%; height: 100%; object-fit: cover; }
-    .card-body { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
-    .card-title { font-size: 1.1rem; font-weight: 700; }
-    .card-price { color: var(--accent-red); font-weight: 700; font-size: 1.15rem; }
-    .card-meta { display: flex; flex-wrap: wrap; gap: 8px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px; }
+    .vehicle-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+    .card-img-wrap { height: 220px; background: #000; position: relative; overflow: hidden; }
+    .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .vehicle-card:hover .card-img { transform: scale(1.05); }
+    .card-badge { position: absolute; top: 12px; left: 12px; background: var(--accent-red); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; }
+    .verified-badge { position: absolute; top: 12px; right: 12px; background: #10B981; color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; gap: 4px; }
+    .card-body { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
+    .card-title { font-size: 1.2rem; margin-bottom: 2px; }
+    .card-trim { font-size: 0.82rem; color: var(--accent-red); font-weight: 700; margin-bottom: 12px; }
+    .card-price { font-family: var(--font-heading); font-weight: 700; font-size: 1.3rem; color: var(--primary-dark); }
+    .card-specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color); }
+    .spec-item { display: flex; align-items: center; gap: 8px; }
+    .spec-item i { color: var(--primary-dark); font-size: 0.88rem; width: 16px; }
+    .card-actions { display: flex; gap: 8px; }
+    .card-actions .btn { flex: 1; font-size: 0.8rem; padding: 10px 8px; }
 
-    /* Admin Management Tables */
-    .admin-panel { background: white; border-radius: var(--radius-card); border: 1px solid var(--border-color); padding: 24px; margin-top: 20px; }
-    .admin-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.9rem; }
-    .admin-table th, .admin-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border-color); }
-    .admin-table th { background: var(--bg-light); color: var(--primary-dark); font-weight: 600; }
+    /* Brands Grid */
+    .brand-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; }
+    .brand-card {
+      background: var(--bg-white); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px 16px;
+      text-align: center; transition: var(--transition); box-shadow: var(--shadow-soft); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .brand-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: transparent; }
+    .brand-icon-wrap { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: var(--transition); }
+    .brand-card:hover .brand-icon-wrap { transform: scale(1.1); }
+    .brand-card span { display: block; font-weight: 600; font-size: 0.9rem; color: var(--primary-dark); }
+    .brand-toyota .brand-icon-wrap { background: #EB0A1E; color: white; }
+    .brand-honda .brand-icon-wrap { background: #CC0000; color: white; }
+    .brand-nissan .brand-icon-wrap { background: #C3002F; color: white; }
+    .brand-mazda .brand-icon-wrap { background: #111111; color: #A6192E; border: 2px solid #A6192E; }
+    .brand-bmw .brand-icon-wrap { background: #1C69D4; color: white; }
+    .brand-mercedes .brand-icon-wrap { background: #000000; color: #C5A059; border: 2px solid #C5A059; }
 
-    /* Admin Login Box */
-    .admin-login-container { max-width: 400px; margin: 100px auto; background: white; padding: 32px; border-radius: var(--radius-card); border: 1px solid var(--border-color); box-shadow: var(--shadow-soft); text-align: center; }
-    .admin-badge { background: #E0F2FE; color: #0369A1; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; display: inline-block; margin-bottom: 16px; }
+    /* Features Grid */
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+    .feature-card { background: var(--bg-light); padding: 32px; border-radius: var(--radius-card); border: 1px solid var(--border-color); transition: var(--transition); }
+    .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-soft); }
+    .feature-icon { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.08); }
+    .icon-verified { background: linear-gradient(135deg, #10B981, #059669); color: white; }
+    .icon-inspection { background: linear-gradient(135deg, #3B82F6, #1D4ED8); color: white; }
+    .icon-finance { background: linear-gradient(135deg, #F59E0B, #D97706); color: white; }
+
+    /* Quotation Form */
+    .quotation-card { background: var(--bg-white); border-radius: var(--radius-card); padding: 40px; box-shadow: var(--shadow-soft); max-width: 800px; margin: 0 auto; border: 1px solid var(--border-color); }
+    .quote-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .quote-grid-full { grid-column: 1 / -1; }
+
+    /* Car Detail Modal Overlay */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(11, 31, 58, 0.75); backdrop-filter: blur(5px);
+      z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-card {
+      background: var(--bg-white); border-radius: var(--radius-card); max-width: 900px; width: 100%;
+      max-height: 90vh; overflow-y: auto; padding: 32px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+    .modal-close {
+      position: absolute; top: 20px; right: 20px; background: var(--bg-light); border: 1px solid var(--border-color);
+      width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1.1rem; color: var(--primary-dark); transition: var(--transition);
+    }
+    .modal-close:hover { background: var(--accent-red); color: white; border-color: var(--accent-red); }
+
+    /* Layout inside Detailed Car View matching reference image */
+    .car-detail-layout { display: grid; grid-template-columns: 1fr 340px; gap: 24px; margin-top: 16px; }
+    @media (max-width: 850px) { .car-detail-layout { grid-template-columns: 1fr; } }
     
-    /* Upload form grid style */
-    .upload-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 16px; }
+    .detail-gallery-main { width: 100%; height: 350px; background: #000; border-radius: 12px; overflow: hidden; margin-bottom: 12px; position: relative; }
+    .detail-gallery-main img { width: 100%; height: 100%; object-fit: cover; }
+    .detail-thumbs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+    .detail-thumb { width: 70px; height: 55px; border-radius: 8px; overflow: hidden; cursor: pointer; border: 2px solid transparent; flex-shrink: 0; }
+    .detail-thumb.active-thumb { border-color: var(--accent-red); }
+    .detail-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    .detail-badges-bar { display: flex; gap: 10px; margin: 16px 0; flex-wrap: wrap; }
+    .d-badge { background: #FEF2F2; color: var(--accent-red); border: 1px solid #FECACA; padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
+
+    .desc-box { background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; margin-top: 20px; }
+    .desc-list { list-style: none; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; }
+    .desc-list li { display: flex; align-items: center; gap: 8px; }
+    .desc-list li i { color: #10B981; }
+
+    .overview-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; font-size: 0.88rem; }
+    .overview-item { display: flex; align-items: center; gap: 8px; color: var(--text-muted); }
+    .overview-item strong { color: var(--primary-dark); }
+
+    .sidebar-widget { background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    .sidebar-price { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--primary-dark); }
+    .sidebar-finance { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* Admin Panel Styling */
+    .admin-login-box { max-width: 450px; margin: 20px auto; background: var(--bg-white); color: var(--text-main); padding: 40px; border-radius: var(--radius-card); box-shadow: var(--shadow-hover); border: 1px solid var(--border-color); }
+    .admin-container { max-width: 1050px; margin: 0 auto; background: var(--bg-white); color: var(--text-main); border-radius: var(--radius-card); padding: 32px; box-shadow: var(--shadow-soft); border: 1px solid var(--border-color); }
+    .admin-tabs { display: flex; gap: 12px; margin-bottom: 28px; border-bottom: 2px solid var(--border-color); padding-bottom: 12px; }
+    .admin-tab-btn { background: none; border: none; font-family: var(--font-heading); font-weight: 600; font-size: 0.95rem; color: var(--text-muted); cursor: pointer; padding: 8px 16px; border-radius: 8px; transition: var(--transition); }
+    .admin-tab-btn.active { background: var(--primary-dark); color: white; }
+    .admin-content-pane { display: none; }
+    .admin-content-pane.active { display: block; }
+    .table-responsive { overflow-x: auto; }
+    .admin-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
+    .admin-table th, .admin-table td { padding: 14px 16px; border-bottom: 1px solid var(--border-color); }
+    .admin-table th { background-color: var(--bg-light); color: var(--primary-dark); font-weight: 700; }
+
+    /* Footer */
+    footer { background-color: var(--primary-dark); color: var(--silver-accent); padding: 60px 0 30px; font-size: 0.9rem; margin-top: auto; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-bottom: 40px; }
+    .footer-col h4 { color: white; margin-bottom: 20px; font-size: 1.05rem; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a:hover { color: var(--accent-red); cursor: pointer; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; text-align: center; font-size: 0.8rem; }
   </style>
 </head>
 <body>
@@ -159,614 +244,892 @@
     <div class="container nav-container">
       <div class="logo" onclick="switchPage('home')">
         <div class="logo-emblem">C</div>
-        <div class="logo-wordmark">CHAPMAN <span>AUTO</span></div>
+        <div class="logo-text">
+          <div class="logo-wordmark">CHAPMAN <span>AUTO</span></div>
+          <div class="logo-tagline">Driven by Trust</div>
+        </div>
       </div>
       <ul class="nav-links">
-        <li><a id="nav-home" class="active-nav" onclick="switchPage('home')"><i class="fa-solid fa-house"></i> Home</a></li>
-        <li><a id="nav-inventory" onclick="switchPage('inventory')"><i class="fa-solid fa-car-side"></i> Inventory</a></li>
-        <li><a id="nav-brands" onclick="scrollToSection('brands')"><i class="fa-solid fa-tags"></i> Brands</a></li>
-        <li><a id="nav-why" onclick="scrollToSection('why-us')"><i class="fa-solid fa-circle-info"></i> Why Us</a></li>
-        <li><a id="nav-faq" onclick="scrollToSection('faq')"><i class="fa-solid fa-question-circle"></i> FAQ</a></li>
-        <li><a id="nav-contact" onclick="scrollToSection('contact')"><i class="fa-solid fa-phone"></i> Contact</a></li>
-        <li><a id="nav-admin" onclick="checkAdminAccess()"><i class="fa-solid fa-lock"></i> Admin Portal</a></li>
+        <li><a id="nav-home" class="active-nav" onclick="switchPage('home')">Home</a></li>
+        <li><a id="nav-inventory" onclick="switchPage('inventory')">Inventory</a></li>
+        <li><a id="nav-brands" onclick="switchPage('brands')">Brands</a></li>
+        <li><a id="nav-quotation" onclick="switchPage('quotation')">Request Quote</a></li>
+        <li><a id="nav-why-us" onclick="switchPage('why-us')">Why Us</a></li>
+        <li><a id="nav-admin" onclick="switchPage('admin')"><i class="fa-solid fa-lock"></i> Admin Portal</a></li>
       </ul>
     </div>
   </nav>
 
-  <section id="page-home" class="page-section active-page">
-    <div class="hero">
-      <div class="hero-overlay"></div>
+  <!-- ==================== PAGE 1: HOME ==================== -->
+  <section id="page-home" class="page-section active-page" style="padding-top: 0;">
+    <header class="hero" style="margin-top: 80px;">
       <div class="container hero-content">
-        <div class="hero-brand">
-          <div class="logo-emblem hero-logo">C</div>
-          <div>
-            <div class="logo-wordmark hero-wordmark">CHAPMAN <span>AUTO</span></div>
-            <p class="hero-tagline">Driven by Trust</p>
-            <p class="hero-contact">Call / WhatsApp <a href="tel:+254722449448">+254 722 449 448</a> • Email <a href="mailto:hello@chapmanauto.co.ke">hello@chapmanauto.co.ke</a></p>
-          </div>
-        </div>
         <h1>Your Trusted Global Partner in Quality Vehicle Importation</h1>
-        <p class="hero-copy">Premium hand-picked vehicles imported directly or sourced locally with total transparency and peace of mind.</p>
-        <div class="hero-buttons">
-          <button class="btn btn-primary" onclick="switchPage('inventory')">Explore Inventory</button>
-          <button class="btn btn-outlined" onclick="scrollToSection('request-quote')">Request a Custom Quote</button>
+        <p>Premium hand-picked vehicles imported directly or sourced locally with total transparency and peace of mind.</p>
+        <div style="display: flex; gap: 16px; justify-content: center;">
+          <button onclick="switchPage('inventory')" class="btn btn-primary">Explore Inventory</button>
+          <button onclick="switchPage('quotation')" class="btn btn-secondary" style="background: transparent; color: white; border-color: white;">Request a Custom Quote</button>
         </div>
       </div>
-    </div>
+    </header>
 
-    <div id="brands" class="home-section">
-      <h2 class="section-title">Trusted Brands</h2>
-      <div class="brand-grid">
-        <div class="brand-card">Toyota</div>
-        <div class="brand-card">Subaru</div>
-        <div class="brand-card">Mazda</div>
-        <div class="brand-card">Mercedes Benz</div>
-      </div>
-    </div>
-
-    <div id="featured" class="home-section">
-      <h2 class="section-title">Featured Vehicles</h2>
-      <div class="vehicle-grid">
-        <div class="vehicle-card">
-          <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600" class="card-img" /></div>
-          <div class="card-body">
-            <div class="card-title">Toyota Landcruiser Prado</div>
-            <div class="card-meta"><span><i class="fa-solid fa-calendar"></i> 2020</span><span><i class="fa-solid fa-palette"></i> Black</span></div>
-            <div class="card-price">$48,000</div>
-          </div>
-        </div>
-        <div class="vehicle-card">
-          <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600" class="card-img" /></div>
-          <div class="card-body">
-            <div class="card-title">Subaru Forester</div>
-            <div class="card-meta"><span><i class="fa-solid fa-calendar"></i> 2018</span><span><i class="fa-solid fa-palette"></i> Blue</span></div>
-            <div class="card-price">$24,000</div>
-          </div>
-        </div>
-        <div class="vehicle-card">
-          <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600" class="card-img" /></div>
-          <div class="card-body">
-            <div class="card-title">Toyota Alphard</div>
-            <div class="card-meta"><span><i class="fa-solid fa-calendar"></i> 2019</span><span><i class="fa-solid fa-palette"></i> White</span></div>
-            <div class="card-price">$31,000</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="why-us" class="home-section">
-      <h2 class="section-title">Why Choose Chapman Auto</h2>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-solid fa-globe"></i></div>
-          <h3>Global Imports</h3>
-          <p>Access premium inventory sourced from international and local markets to get the best value.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-solid fa-dollar-sign"></i></div>
-          <h3>Transparent Pricing</h3>
-          <p>Every listing includes clear pricing and condition details so you can buy with confidence.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
-          <h3>Dedicated Support</h3>
-          <p>Expert support for shipping, financing, and post-purchase questions.</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="services" class="home-section">
-      <h2 class="section-title">Our Services</h2>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <h3>Verified Imports</h3>
-          <p>We inspect and verify every vehicle to ensure it meets our quality standards before it reaches you.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Flexible Financing</h3>
-          <p>Choose from financing options that fit your budget, with clear terms and no hidden costs.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Fast Delivery</h3>
-          <p>Domestic delivery support and customs assistance make vehicle handover fast and reliable.</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="testimonials" class="home-section">
-      <h2 class="section-title">What Our Customers Say</h2>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <h3>“Great service from start to finish.”</h3>
-          <p>“Chapman Auto made the import process easy, and the car arrived exactly as described.”</p>
-          <p class="testimonial-author">— Mary K.</p>
-        </div>
-        <div class="feature-card">
-          <h3>“Transparent pricing and fast support.”</h3>
-          <p>“I got help with financing and the paperwork, so I could focus on choosing the right vehicle.”</p>
-          <p class="testimonial-author">— David N.</p>
-        </div>
-        <div class="feature-card">
-          <h3>“Reliable and professional.”</h3>
-          <p>“The team responded quickly and delivered a clean, inspected vehicle within days.”</p>
-          <p class="testimonial-author">— Naomi R.</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="request-quote" class="home-section">
-      <h2 class="section-title">Request a Quote</h2>
-      <p class="section-copy">Share your ideal vehicle profile and budget, and our team will provide a tailored quote for the best available options.</p>
-      <button class="btn btn-primary" onclick="switchPage('inventory')">Explore Inventory</button>
-    </div>
-
-    <div id="faq" class="home-section">
-      <h2 class="section-title">Frequently Asked Questions</h2>
-      <div class="faq-grid">
-        <div class="faq-item">
-          <h3>How do I request a custom quote?</h3>
-          <p>Use the Request Quote section or contact us directly by phone, WhatsApp, or email so we can tailor a vehicle package to your needs.</p>
-        </div>
-        <div class="faq-item">
-          <h3>Do you offer vehicle financing?</h3>
-          <p>Yes. We support flexible financing through trusted partners with transparent payment plans and clear terms.</p>
-        </div>
-        <div class="faq-item">
-          <h3>Can you help with shipping and delivery?</h3>
-          <p>Absolutely. We provide delivery support and customs guidance so your vehicle is imported and delivered smoothly.</p>
-        </div>
-        <div class="faq-item">
-          <h3>Are your vehicles inspected?</h3>
-          <p>Every vehicle is verified before listing, with condition details shared clearly so you can buy with confidence.</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="contact" class="home-section">
-      <h2 class="section-title">Contact Chapman Auto</h2>
-      <div class="contact-grid">
-        <div class="contact-card">
-          <h3>Call / WhatsApp</h3>
-          <p><a href="tel:+254722449448">+254 722 449 448</a></p>
-          <p>Available for quotes, support and vehicle enquiries.</p>
-        </div>
-        <div class="contact-card">
-          <h3>Email</h3>
-          <p><a href="mailto:hello@chapmanauto.co.ke">hello@chapmanauto.co.ke</a></p>
-          <p>Send vehicle requests, documents, or financing questions.</p>
-        </div>
-        <div class="contact-card">
-          <h3>Visit Us</h3>
-          <p>K Mall, Thindigua, Kiambu Road, Nairobi</p>
-          <p>Open Monday to Friday, 9am–6pm.</p>
-        </div>
-        <div class="contact-card">
-          <h3>Newsletter</h3>
-          <p>Get new arrivals, offers, and import updates directly to your inbox.</p>
-          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 14px;">
-            <input id="newsletterEmail" class="form-control" type="email" placeholder="Enter your email" />
-            <button class="btn btn-secondary" onclick="submitNewsletter()">Subscribe</button>
-          </div>
-        </div>
-      </div>
-      <form class="contact-form" onsubmit="submitContactForm(event)">
-        <div class="upload-grid">
-          <div class="filter-group">
-            <label class="filter-label">Name</label>
-            <input type="text" id="contactName" class="form-control" placeholder="Your name" required>
-          </div>
-          <div class="filter-group">
-            <label class="filter-label">Email</label>
-            <input type="email" id="contactEmail" class="form-control" placeholder="Your email" required>
-          </div>
-          <div class="filter-group" style="grid-column: 1 / -1;">
-            <label class="filter-label">Message</label>
-            <textarea id="contactMessage" class="form-control" rows="4" placeholder="Tell us what you need" required></textarea>
-          </div>
-        </div>
-        <button class="btn btn-primary" type="submit">Send Message</button>
-      </form>
+    <div class="container" style="margin-top: 60px;">
+      <h2 class="section-title">Featured Collections</h2>
+      <p class="section-subtitle">Discover top-rated luxury and utility vehicles ready for immediate import or delivery.</p>
+      <div class="vehicle-grid" id="homeFeaturedGrid"></div>
     </div>
   </section>
 
-  <!-- INVENTORY SECTION WITH FILTERS -->
-  <section id="page-inventory" class="page-section">
+  <!-- ==================== PAGE 2: INVENTORY ==================== -->
+  <section id="page-inventory" class="page-section" style="margin-top: 80px;">
     <div class="container">
-      <div class="filter-wrapper">
-        <h3 style="margin-bottom: 16px; font-size: 1.1rem;"><i class="fa-solid fa-filter"></i> Refine Your Search Details</h3>
-        <div class="filter-grid">
+      <h2 class="section-title">Vehicle Inventory Catalog</h2>
+      <p class="section-subtitle">Filter through our live catalog specification details, photographs, and complete vehicle CV reports.</p>
+      
+      <div class="search-card">
+        <div class="search-header">
+          <h3><i class="fa-solid fa-filter" style="color: var(--accent-red); margin-right: 8px;"></i> Advanced Search Filters</h3>
+          <span id="carCountLabel" style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">Loaded Catalog</span>
+        </div>
+
+        <div class="search-grid">
           <div class="filter-group">
-            <label class="filter-label">Brand / Make Details</label>
-            <select id="filterMake" class="form-control" onchange="applyFilters()">
-              <option value="">All Brands</option>
+            <label class="filter-label">Select Make</label>
+            <select id="makeSelect" class="form-control" onchange="onMakeChange(); applyFilters();">
+              <option value="">Any</option>
+              <option value="Mazda">Mazda</option>
               <option value="Toyota">Toyota</option>
               <option value="Subaru">Subaru</option>
-              <option value="Mazda">Mazda</option>
-              <option value="Mercedes Benz">Mercedes Benz</option>
+              <option value="Honda">Honda</option>
+              <option value="Nissan">Nissan</option>
+              <option value="BMW">BMW</option>
+              <option value="Mercedes">Mercedes</option>
             </select>
           </div>
+
           <div class="filter-group">
-            <label class="filter-label">Model Details</label>
-            <input type="text" id="filterModel" class="form-control" placeholder="e.g. Landcruiser, Forester" oninput="applyFilters()">
+            <label class="filter-label">Select Model</label>
+            <select id="modelSelect" class="form-control" onchange="applyFilters()" disabled>
+              <option value="">Select make first</option>
+            </select>
           </div>
+
           <div class="filter-group">
-            <label class="filter-label">Year Details</label>
-            <select id="filterYear" class="form-control" onchange="applyFilters()">
+            <label class="filter-label">Min Year</label>
+            <select id="minYearSelect" class="form-control" onchange="applyFilters()">
               <option value="">Any Year</option>
-              <option value="2020">2020+</option>
-              <option value="2018">2018+</option>
-              <option value="2015">2015+</option>
+              <option value="2015">2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
             </select>
           </div>
+
           <div class="filter-group">
-            <label class="filter-label">Colour Details</label>
-            <select id="filterColor" class="form-control" onchange="applyFilters()">
-              <option value="">Any Colour</option>
-              <option value="Black">Black</option>
-              <option value="White">White</option>
-              <option value="Silver">Silver</option>
-              <option value="Blue">Blue</option>
-            </select>
-          </div>
-          <div class="filter-group">
-            <label class="filter-label">Max Cost Details (USD)</label>
-            <input type="number" id="filterMaxCost" class="form-control" placeholder="Max Price" oninput="applyFilters()">
-          </div>
-          <div>
-            <button class="btn btn-primary" onclick="resetFilters()">Reset Details</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="vehicle-grid" id="clientVehicleGrid"></div>
-    </div>
-  </section>
-
-  <!-- ADMIN LOGIN GATE SECTION -->
-  <section id="page-admin-login" class="page-section">
-    <div class="container">
-      <div class="admin-login-container">
-        <span class="admin-badge">Restricted Access</span>
-        <h3 style="margin-bottom: 16px;">Admin Authentication</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Enter the administrator credentials to unlock delete privileges and post management.</p>
-        <div style="display: flex; flex-direction: column; gap: 12px; text-align: left;">
-          <label class="filter-label">Admin Passcode</label>
-          <input type="password" id="adminPassInput" class="form-control" placeholder="Enter passcode (e.g. admin123)">
-          <button class="btn btn-primary" style="margin-top: 8px;" onclick="authenticateAdmin()">Authenticate</button>
-          <p id="loginErrorMsg" style="color: var(--accent-red); font-size: 0.8rem; text-align: center; display: none;">Invalid admin passcode.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ADMIN MANAGEMENT SECTION WITH EXCLUSIVE ADMIN DELETE PRIVILEGES & MULTIPLE UPLOADS -->
-  <section id="page-admin" class="page-section">
-    <div class="container">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-        <div>
-          <h2>Admin Control Center</h2>
-          <p style="color: var(--text-muted);">Verified administrative privileges enabled: Upload up to 10 pictures per vehicle and delete posts/enquiries.</p>
-        </div>
-        <button class="btn btn-secondary" style="border-color: var(--border-color); background: white;" onclick="logoutAdmin()">Log Out</button>
-      </div>
-
-      <!-- Upload New Vehicle Post with Multiple Images (Up to 10) -->
-      <div class="admin-panel" style="margin-bottom: 32px;">
-        <h3>Upload New Vehicle Post (Up to 10 Pictures)</h3>
-        <div class="upload-grid">
-          <div class="filter-group">
-            <label class="filter-label">Make</label>
-            <input type="text" id="newMake" class="form-control" placeholder="e.g. Toyota">
-          </div>
-          <div class="filter-group">
-            <label class="filter-label">Model Details</label>
-            <input type="text" id="newModel" class="form-control" placeholder="e.g. RAV4">
-          </div>
-          <div class="filter-group">
-            <label class="filter-label">Year Details</label>
-            <input type="number" id="newYear" class="form-control" placeholder="2021">
-          </div>
-          <div class="filter-group">
-            <label class="filter-label">Colour Details</label>
-            <input type="text" id="newColor" class="form-control" placeholder="White">
-          </div>
-          <div class="filter-group">
-            <label class="filter-label">Price Details (USD)</label>
-            <input type="number" id="newPrice" class="form-control" placeholder="35000">
-          </div>
-          <div class="filter-group">
-            <label class="filter-label">Select Images (Max 10)</label>
-            <input type="file" id="newImages" class="form-control" accept="image/*" multiple>
-          </div>
-        </div>
-        <button class="btn btn-primary" style="margin-top: 16px; width: auto;" onclick="addNewVehiclePost()">Upload Vehicle Details</button>
-      </div>
-      
-      <div class="admin-panel">
-        <h3>Manage Inventory Posts</h3>
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>Vehicle Details</th>
-              <th>Year / Color</th>
-              <th>Price Details</th>
-              <th>Status</th>
-              <th>Admin Privileges</th>
-            </tr>
-          </thead>
-          <tbody id="adminVehicleTableBody"></tbody>
-        </table>
-      </div>
-
-      <div class="admin-panel" style="margin-top: 32px;">
-        <h3>Customer Enquiries & Finance Applications</h3>
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>Applicant Details</th>
-              <th>Email / Phone</th>
-              <th>Target Vehicle ID</th>
-              <th>Down Payment</th>
-              <th>Admin Privileges</th>
-            </tr>
-          </thead>
-          <tbody id="adminInquiriesTableBody"></tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    let isAdminAuthenticated = false;
-
-    function switchPage(pageId) {
-      document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active-page'));
-      document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active-nav'));
-      document.getElementById(`page-${pageId}`).classList.add('active-page');
-      
-      const navEl = document.getElementById(`nav-${pageId}`);
-      if (navEl) navEl.classList.add('active-nav');
-      const navbar = document.querySelector('.navbar');
-      if (navbar) {
-        navbar.classList.toggle('hero-nav', pageId === 'home');
-        navbar.classList.toggle('default-nav', pageId !== 'home');
-      }
-      window.scrollTo(0, 0);
-    }
-
-    function scrollToSection(sectionId) {
-      switchPage('home');
-      const el = document.getElementById(sectionId);
-      if (el) {
-        setTimeout(() => {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active-nav'));
-          const navEl = document.getElementById(`nav-${sectionId}`);
-          if (navEl) navEl.classList.add('active-nav');
-        }, 90);
-      }
-    }
-
-    function checkAdminAccess() {
-      if (isAdminAuthenticated) {
-        switchPage('admin');
-      } else {
-        switchPage('admin-login');
-      }
-    }
-
-    function authenticateAdmin() {
-      const pass = document.getElementById('adminPassInput').value;
-      const errorMsg = document.getElementById('loginErrorMsg');
-      
-      if (pass === 'admin123') {
-        isAdminAuthenticated = true;
-        errorMsg.style.display = 'none';
-        document.getElementById('adminPassInput').value = '';
-        switchPage('admin');
-        renderAdminTables();
-      } else {
-        errorMsg.style.display = 'block';
-      }
-    }
-
-    function logoutAdmin() {
-      isAdminAuthenticated = false;
-      switchPage('inventory');
-    }
-
-    let sampleVehicles = [
-      { id: "v1", make: "Toyota", model: "Landcruiser Prado", year: 2020, price: 48000, color: "Black", images: ["https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600"] },
-      { id: "v2", make: "Subaru", model: "Forester", year: 2018, price: 24000, color: "Blue", images: ["https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600"] },
-      { id: "v3", make: "Toyota", model: "Alphard", year: 2019, price: 31000, color: "White", images: ["https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600"] }
-    ];
-
-    let sampleInquiries = [
-      { id: "inq-1", applicantName: "John Doe", email: "john@example.com", phone: "+254712345678", vehicleId: "v1", downPayment: 10000 }
-    ];
-
-    function renderInventory(data) {
-      const grid = document.getElementById('clientVehicleGrid');
-      grid.innerHTML = data.length ? data.map(v => `
-        <div class="vehicle-card">
-          <div class="card-img-wrap"><img src="${v.images[0]}" class="card-img" /></div>
-          <div class="card-body">
-            <div class="card-title">${v.make} ${v.model}</div>
-            <div class="card-meta">
-              <span><i class="fa-solid fa-calendar"></i> ${v.year}</span>
-              <span><i class="fa-solid fa-palette"></i> ${v.color}</span>
+            <label class="filter-label">Price Range (KES)</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="number" id="minPriceInput" class="form-control" placeholder="Min" oninput="applyFilters()">
+              <input type="number" id="maxPriceInput" class="form-control" placeholder="Max" oninput="applyFilters()">
             </div>
-            <div class="card-price">$${v.price.toLocaleString()}</div>
+          </div>
+
+          <div class="filter-group">
+            <label class="filter-label">Condition</label>
+            <select id="conditionSelect" class="form-control" onchange="applyFilters()">
+              <option value="">Any Condition</option>
+              <option value="Direct Import">Direct Import</option>
+              <option value="Locally Used">Locally Used</option>
+              <option value="Brand New">Brand New</option>
+            </select>
+          </div>
+
+          <div class="search-actions">
+            <button onclick="resetFilters()" class="btn btn-secondary" style="height: 42px;">
+              <i class="fa-solid fa-rotate-left"></i> Reset
+            </button>
           </div>
         </div>
-      `).join('') : '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No matching vehicle details found.</p>';
-    }
-
-    function renderAdminTables() {
-      if (!isAdminAuthenticated) return;
-
-      document.getElementById('adminVehicleTableBody').innerHTML = sampleVehicles.map(v => `
-        <tr>
-          <td><strong>${v.make} ${v.model}</strong> (${v.images.length} image(s))</td>
-          <td>${v.year} / ${v.color}</td>
-          <td>$${v.price.toLocaleString()}</td>
-          <td><span style="color: green; font-weight: 600;">Available</span></td>
-          <td><button class="btn btn-danger" onclick="deleteVehicle('${v.id}')"><i class="fa-solid fa-trash"></i> Admin Delete Post</button></td>
-        </tr>
-      `).join('');
-
-      document.getElementById('adminInquiriesTableBody').innerHTML = sampleInquiries.map(i => `
-        <tr>
-          <td><strong>${i.applicantName}</strong></td>
-          <td>${i.email}<br><small>${i.phone}</small></td>
-          <td>${i.vehicleId}</td>
-          <td>$${i.downPayment.toLocaleString()}</td>
-          <td><button class="btn btn-danger" onclick="deleteInquiry('${i.id}')"><i class="fa-solid fa-trash"></i> Admin Delete Enquiry</button></td>
-        </tr>
-      `).join('');
-    }
-
-    function addNewVehiclePost() {
-      if (!isAdminAuthenticated) {
-        alert("Unauthorized action. Admin privileges required.");
-        return;
-      }
-
-      const make = document.getElementById('newMake').value;
-      const model = document.getElementById('newModel').value;
-      const year = parseInt(document.getElementById('newYear').value);
-      const color = document.getElementById('newColor').value;
-      const price = parseFloat(document.getElementById('newPrice').value);
-      const fileInput = document.getElementById('newImages');
-
-      if (!make || !model || !year || !color || !price) {
-        alert("Please fill out all required details for the vehicle.");
-        return;
-      }
-
-      let imageurls = [];
-      if (fileInput.files.length > 0) {
-        const count = Math.min(fileInput.files.length, 10); // Up to 10 pictures limit
-        for (let i = 0; i < count; i++) {
-          imageurls.push(URL.createObjectURL(fileInput.files[i]));
-        }
-      } else {
-        // Fallback default image if none uploaded
-        imageurls = ["https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600"];
-      }
-
-      const newVehicle = {
-        id: 'v_' + Date.now(),
-        make,
-        model,
-        year,
-        color,
-        price,
-        images: imageurls
-      };
-
-      sampleVehicles.unshift(newVehicle);
-      renderAdminTables();
-      renderInventory(sampleVehicles);
-
-      // Clear form inputs
-      document.getElementById('newMake').value = '';
-      document.getElementById('newModel').value = '';
-      document.getElementById('newYear').value = '';
-      document.getElementById('newColor').value = '';
-      document.getElementById('newPrice').value = '';
-      document.getElementById('newImages').value = '';
-      alert("Vehicle post uploaded successfully with up to 10 pictures capability!");
-    }
-
-    function applyFilters() {
-      const make = document.getElementById('filterMake').value;
-      const model = document.getElementById('filterModel').value.toLowerCase();
-      const year = document.getElementById('filterYear').value;
-      const color = document.getElementById('filterColor').value;
-      const maxCost = document.getElementById('filterMaxCost').value;
-
-      const filtered = sampleVehicles.filter(v => {
-        return (!make || v.make === make) &&
-               (!model || v.model.toLowerCase().includes(model)) &&
-               (!year || v.year >= parseInt(year)) &&
-               (!color || v.color === color) &&
-               (!maxCost || v.price <= parseFloat(maxCost));
-      });
-      renderInventory(filtered);
-    }
-
-    function resetFilters() {
-      document.getElementById('filterMake').value = '';
-      document.getElementById('filterModel').value = '';
-      document.getElementById('filterYear').value = '';
-      document.getElementById('filterColor').value = '';
-      document.getElementById('filterMaxCost').value = '';
-      renderInventory(sampleVehicles);
-    }
-
-    function deleteVehicle(id) {
-      if (!isAdminAuthenticated) {
-        alert("Unauthorized action. Admin privileges required.");
-        return;
-      }
-      sampleVehicles = sampleVehicles.filter(v => v.id !== id);
-      renderAdminTables();
-      renderInventory(sampleVehicles);
-    }
-
-    function deleteInquiry(id) {
-      if (!isAdminAuthenticated) {
-        alert("Unauthorized action. Admin privileges required.");
-        return;
-      }
-      sampleInquiries = sampleInquiries.filter(i => i.id !== id);
-      renderAdminTables();
-    }
-
-    function submitNewsletter() {
-      const email = document.getElementById('newsletterEmail').value.trim();
-      if (!email) {
-        alert('Please enter a valid email address.');
-        return;
-      }
-      document.getElementById('newsletterEmail').value = '';
-      alert('Thanks for subscribing! We will keep you updated with the latest arrivals and offers.');
-    }
-
-    function submitContactForm(event) {
-      event.preventDefault();
-      const name = document.getElementById('contactName').value.trim();
-      const email = document.getElementById('contactEmail').value.trim();
-      const message = document.getElementById('contactMessage').value.trim();
-      if (!name || !email || !message) {
-        alert('Please complete all contact fields before sending your message.');
-        return;
-      }
-      document.getElementById('contactName').value = '';
-      document.getElementById('contactEmail').value = '';
-      document.getElementById('contactMessage').value = '';
-      alert('Thank you, ' + name + '! Your message has been received and we will reach out soon.');
-    }
-
-    renderInventory(sampleVehicles);
-  </script>
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <h4>Chapman Auto</h4>
-        <p class="footer-copy">Quality vehicle imports, transparent pricing, and trusted support across Kenya.</p>
       </div>
-      <div>
-        <h4>Contact</h4>
-        <p class="footer-copy">+254 722 449 448<br>hello@chapmanauto.co.ke</p>
+
+      <div class="vehicle-grid" id="vehicleGrid"></div>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 3: BRANDS ==================== -->
+  <section id="page-brands" class="page-section" style="margin-top: 80px;">
+    <div class="container">
+      <h2 class="section-title">Browse by Brand</h2>
+      <p class="section-subtitle">Select your favorite manufacturer to instantly view available imported units.</p>
+      
+      <div class="brand-grid">
+        <div class="brand-card brand-toyota" onclick="filterByBrandPage('Toyota')">
+          <div class="brand-icon-wrap"><i class="fa-solid fa-car-side"></i></div>
+          <span>Toyota</span>
+        </div>
+        <div class="brand-card brand-honda" onclick="filterByBrandPage('Honda')">
+          <div class="brand-icon-wrap"><i class="fa-solid fa-car"></i></div>
+          <span>Honda</span>
+        </div>
+        <div class="brand-card brand-nissan" onclick="filterByBrandPage('Nissan')">
+          <div class="brand-icon-wrap"><i class="fa-solid fa-car-rear"></i></div>
+          <span>Nissan</span>
+        </div>
+        <div class="brand-card brand-mazda" onclick="filterByBrandPage('Mazda')">
+          <div class="brand-icon-wrap"><i class="fa-solid fa-dharmachakra"></i></div>
+          <span>Mazda</span>
+        </div>
+        <div class="brand-card brand-bmw" onclick="filterByBrandPage('BMW')">
+          <div class="brand-icon-wrap"><i class="fa-solid fa-bolt"></i></div>
+          <span>BMW</span>
+        </div>
+        <div class="brand-card brand-mercedes" onclick="filterByBrandPage('Mercedes')">
+          <div class="brand-icon-wrap"><i class="fa-solid fa-crown"></i></div>
+          <span>Mercedes</span>
+        </div>
       </div>
-      <div>
-        <h4>Links</h4>
-        <p class="footer-copy"><a href="#brands">Brands</a><br><a href="#faq">FAQ</a><br><a href="#contact">Contact</a></p>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 4: REQUEST QUOTE ==================== -->
+  <section id="page-quotation" class="page-section" style="margin-top: 80px;">
+    <div class="container">
+      <h2 class="section-title">Request a Custom Quotation</h2>
+      <p class="section-subtitle">Submit your exact car model, budget, and import preference for a tailored quotation.</p>
+      
+      <div class="quotation-card">
+        <form id="quotationForm" onsubmit="handleQuotationSubmit(event)">
+          <div class="quote-grid">
+            <div class="filter-group">
+              <label class="filter-label">Full Name</label>
+              <input type="text" id="qName" class="form-control" placeholder="Enter your full name" required>
+            </div>
+            <div class="filter-group">
+              <label class="filter-label">Email Address</label>
+              <input type="email" id="qEmail" class="form-control" placeholder="name@example.com" required>
+            </div>
+            <div class="filter-group">
+              <label class="filter-label">Phone Number</label>
+              <input type="tel" id="qPhone" class="form-control" placeholder="+254 700 000 000" required>
+            </div>
+            <div class="filter-group">
+              <label class="filter-label">Vehicle Make & Model</label>
+              <input type="text" id="qVehicle" class="form-control" placeholder="e.g. Toyota Harrier 2020" required>
+            </div>
+            <div class="filter-group">
+              <label class="filter-label">Target Budget (KES)</label>
+              <input type="number" id="qBudget" class="form-control" placeholder="e.g. 3500000" required>
+            </div>
+            <div class="filter-group">
+              <label class="filter-label">Preferred Import Source</label>
+              <select id="qSource" class="form-control" required>
+                <option value="Direct Import (Japan)">Direct Import (Japan)</option>
+                <option value="Direct Import (UK)">Direct Import (UK)</option>
+                <option value="Locally Available">Locally Available</option>
+              </select>
+            </div>
+            <div class="filter-group quote-grid-full">
+              <label class="filter-label">Additional Specifications or Comments</label>
+              <textarea id="qNotes" class="form-control" rows="4" placeholder="Mention preferred color, mileage range, or specific trim packages..."></textarea>
+            </div>
+            <div class="quote-grid-full" style="text-align: right; margin-top: 10px;">
+              <button type="submit" class="btn btn-primary" style="padding: 14px 32px;">
+                <i class="fa-solid fa-paper-plane"></i> Submit Quotation Request
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 5: WHY US ==================== -->
+  <section id="page-why-us" class="page-section" style="margin-top: 80px;">
+    <div class="container">
+      <h2 class="section-title">Why Choose Chapman Auto?</h2>
+      <p class="section-subtitle">We bring trust, quality, and complete transparency to global vehicle importation.</p>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon icon-verified"><i class="fa-solid fa-circle-check"></i></div>
+          <h3>Verified Vehicles</h3>
+          <p>Every vehicle undergoes strict background checks to confirm ownership history and genuine certified mileage.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-inspection"><i class="fa-solid fa-clipboard-check"></i></div>
+          <h3>Rigorous Inspection</h3>
+          <p>Comprehensive 150-point physical and mechanical inspections conducted by certified automotive engineers.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-finance"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+          <h3>Flexible Financing</h3>
+          <p>Access competitive bank financing and asset funding solutions tailored to fit your budget seamlessly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 6: ADMIN PORTAL ==================== -->
+  <section id="page-admin" class="page-section" style="margin-top: 80px; background-color: var(--primary-dark);">
+    <div class="container">
+      <h2 class="section-title" style="color: white;">Admin Secure Portal</h2>
+      <p class="section-subtitle" style="color: var(--silver-accent);">Authorized personnel login to manage item pictures (.jpg uploads), CV details, and client quotation requests.</p>
+
+      <!-- Admin Login View -->
+      <div id="adminLoginWrapper" class="admin-login-box">
+        <div style="text-align: center; margin-bottom: 24px;">
+          <div class="logo-emblem" style="margin: 0 auto 12px;">C</div>
+          <h3>Admin Authentication</h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem;">Use credentials: <strong>admin</strong> / <strong>admin123</strong></p>
+        </div>
+        <form onsubmit="handleAdminLogin(event)">
+          <div class="filter-group" style="margin-bottom: 16px;">
+            <label class="filter-label">Username</label>
+            <input type="text" id="adminUser" class="form-control" placeholder="admin" required>
+          </div>
+          <div class="filter-group" style="margin-bottom: 24px;">
+            <label class="filter-label">Password</label>
+            <input type="password" id="adminPass" class="form-control" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            <i class="fa-solid fa-right-to-bracket"></i> Login to Dashboard
+          </button>
+        </form>
+      </div>
+
+      <!-- Admin Dashboard View -->
+      <div id="adminDashboardWrapper" style="display: none;">
+        <div class="admin-container">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
+            <div>
+              <h3><i class="fa-solid fa-gauge-high" style="color: var(--accent-red);"></i> Chapman Admin Control Center</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem;">Welcome back, Administrator</p>
+            </div>
+            <button onclick="handleAdminLogout()" class="btn btn-secondary" style="font-size: 0.8rem; padding: 8px 16px;">
+              <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+          </div>
+
+          <div class="admin-tabs">
+            <button class="admin-tab-btn active" onclick="switchAdminTab('quotes')">
+              <i class="fa-solid fa-file-invoice-dollar"></i> Client Quotations (<span id="quoteBadgeCount">0</span>)
+            </button>
+            <button class="admin-tab-btn" onclick="switchAdminTab('inventory-upload')">
+              <i class="fa-solid fa-cloud-arrow-up"></i> Upload Item & CV Details
+            </button>
+          </div>
+
+          <!-- Tab 1: Client Quotation Requests -->
+          <div id="tabQuotes" class="admin-content-pane active">
+            <h4 style="margin-bottom: 16px;">Client Quotation Inquiries</h4>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Client Name</th>
+                    <th>Contact</th>
+                    <th>Vehicle / Requirement</th>
+                    <th>Budget (KES)</th>
+                    <th>Source</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody id="quotationsTableBody">
+                  <tr><td colspan="7" style="text-align: center; color: var(--text-muted);">No quotation requests received yet.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Tab 2: Upload Item Pictures & CV Details -->
+          <div id="tabInventoryUpload" class="admin-content-pane">
+            <h4 style="margin-bottom: 8px;">Add New Vehicle Inventory Item & Details</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px;">Upload vehicle main picture (.jpg) and specify detailed CV attributes to publish directly to the live catalog.</p>
+            
+            <form id="addItemForm" onsubmit="handleAddNewItem(event)">
+              <div class="quote-grid">
+                <div class="filter-group">
+                  <label class="filter-label">Make</label>
+                  <select id="newItemMake" class="form-control" required>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Mazda">Mazda</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Nissan">Nissan</option>
+                    <option value="Subaru">Subaru</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Mercedes">Mercedes</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <label class="filter-label">Model Name</label>
+                  <input type="text" id="newItemModel" class="form-control" placeholder="e.g. Grace Hybrid" required>
+                </div>
+                <div class="filter-group">
+                  <label class="filter-label">Trim / Subtitle</label>
+                  <input type="text" id="newItemTrim" class="form-control" placeholder="e.g. 2018 Silver" required>
+                </div>
+                <div class="filter-group">
+                  <label class="filter-label">Year</label>
+                  <input type="number" id="newItemYear" class="form-control" value="2018" required>
+                </div>
+                <div class="filter-group">
+                  <label class="filter-label">Price (KES)</label>
+                  <input type="number" id="newItemPrice" class="form-control" value="1950000" required>
+                </div>
+                <div class="filter-group">
+                  <label class="filter-label">Mileage (KM)</label>
+                  <input type="number" id="newItemMileage" class="form-control" value="89449" required>
+                </div>
+                <div class="filter-group">
+                  <label class="filter-label">Transmission</label>
+                  <select id="newItemTrans" class="form-control" required>
+                    <option value="Automatic">Automatic</option>
+                    <option value="Manual">Manual</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <label class="filter-label">Condition</label>
+                  <select id="newItemCond" class="form-control" required>
+                    <option value="foreign used">foreign used</option>
+                    <option value="Direct Import">Direct Import</option>
+                    <option value="Locally Used">Locally Used</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <label class="filter-label">Location / Showroom</label>
+                  <input type="text" id="newItemLoc" class="form-control" value="Fourways" required>
+                </div>
+                <div class="filter-group">
+                  <label class="filter-label">Color</label>
+                  <input type="text" id="newItemColor" class="form-control" value="Silver" required>
+                </div>
+                <div class="filter-group">
+                  <label class="filter-label">Engine Size (CC)</label>
+                  <input type="text" id="newItemCc" class="form-control" value="1500cc" required>
+                </div>
+                <div class="filter-group">
+                  <label class="filter-label">Seller / Dealership Name</label>
+                  <input type="text" id="newItemSeller" class="form-control" value="Genius Cedar Autoworld" required>
+                </div>
+                
+                <div class="filter-group quote-grid-full">
+                  <label class="filter-label">Vehicle Main Picture (Upload .jpg file)</label>
+                  <input type="file" id="newItemImgFile" class="form-control" accept=".jpg, .jpeg, image/jpeg" required>
+                </div>
+
+                <div class="filter-group quote-grid-full">
+                  <label class="filter-label">Detailed Features / Description (Comma separated or bullet points)</label>
+                  <textarea id="newItemDescList" class="form-control" rows="4">1500cc Petrol engine, Alloy rims, Black fabric upholstery, Stitched leather and chrome accents on the dashboard, Infotainment system, Dual zone climate control, Honda sensing suite: Collision mitigation braking system, lane keeping assist system, road departure mitigation, Adaptive cruise control, Daytime running lights, Winker mirror</textarea>
+                </div>
+
+                <div class="quote-grid-full" style="text-align: right; margin-top: 10px;">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Publish Item & CV Data
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== DETAILED CAR CV SPEC MODAL ==================== -->
+  <div id="carDetailModal" class="modal-overlay" onclick="closeCarModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-close" onclick="closeCarModalDirect()"><i class="fa-solid fa-xmark"></i></div>
+      <div id="modalContentBody"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="logo" onclick="switchPage('home')" style="margin-bottom: 16px;">
+            <div class="logo-emblem">C</div>
+            <div class="logo-text">
+              <div class="logo-wordmark" style="color: white;">CHAPMAN <span>AUTO</span></div>
+              <div class="logo-tagline">Driven by Trust</div>
+            </div>
+          </div>
+          <p style="color: var(--silver-accent); font-size: 0.88rem;">Your premier partner for secure and verified international and local vehicle purchases.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Independent Pages</h4>
+          <ul class="footer-links">
+            <li><a onclick="switchPage('home')">Home Page</a></li>
+            <li><a onclick="switchPage('inventory')">Inventory Page</a></li>
+            <li><a onclick="switchPage('brands')">Brands Page</a></li>
+            <li><a onclick="switchPage('quotation')">Request Quote Page</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Info</h4>
+          <ul class="footer-links" style="color: var(--silver-accent);">
+            <li><i class="fa-solid fa-location-dot" style="color: var(--accent-red); margin-right: 8px;"></i> Nairobi, Kenya</li>
+            <li><i class="fa-solid fa-phone" style="color: var(--accent-red); margin-right: 8px;"></i> +254 700 000 000</li>
+            <li><i class="fa-solid fa-envelope" style="color: var(--accent-red); margin-right: 8px;"></i> info@chapmanauto.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Chapman Auto. All Rights Reserved.</p>
       </div>
     </div>
   </footer>
+
+  <script>
+    // Independent page switcher engine
+    function switchPage(pageId) {
+      document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active-page'));
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active-nav'));
+
+      const targetSection = document.getElementById('page-' + pageId);
+      if (targetSection) {
+        targetSection.classList.add('active-page');
+      }
+
+      const targetNav = document.getElementById('nav-' + pageId);
+      if (targetNav) {
+        targetNav.classList.add('active-nav');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Master Inventory Datastore updated with detailed CV attributes as presented in reference image
+    let vehicleInventory = [
+      {
+        id: 1, make: "Honda", model: "Grace Hybrid", trim: "2018 Silver", year: 2018, price: 1950000,
+        mileage: 89449, transmission: "automatic", condition: "foreign used", location: "Fourways",
+        color: "Silver", cc: "1500cc", seller: "Genius Cedar Autoworld",
+        img: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80",
+        thumbnails: [
+          "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80"
+        ],
+        features: [
+          "1500cc Petrol engine",
+          "15\" steel rims",
+          "Black fabric upholstery",
+          "Stitched leather and chrome accents on the dashboard",
+          "Infotainment system",
+          "Dual zone climate control",
+          "Honda sensing suite: Collision mitigation braking system, lane keeping assist system, road departure mitigation",
+          "Adaptive cruise control",
+          "Daytime running lights",
+          "Winker mirror"
+        ]
+      },
+      {
+        id: 2, make: "Toyota", model: "Harrier", trim: "Progress Metal", year: 2019, price: 4200000,
+        mileage: 55000, transmission: "Automatic", condition: "Direct Import", location: "Nairobi",
+        color: "Pearl White", cc: "2000cc", seller: "Chapman Global Motors",
+        img: "https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=800&q=80",
+        thumbnails: [
+          "https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=800&q=80"
+        ],
+        features: [
+          "2000cc Petrol Engine",
+          "Alloy rims",
+          "Leather upholstery with power seats",
+          "Panoramic sunroof",
+          "Dual zone climate control",
+          "Toyota Safety Sense suite"
+        ]
+      },
+      {
+        id: 3, make: "Mazda", model: "CX-5", trim: "XD L Package", year: 2020, price: 3450000,
+        mileage: 48000, transmission: "Automatic", condition: "Direct Import", location: "Nairobi",
+        color: "Soul Red", cc: "2200cc", seller: "Chapman Global Motors",
+        img: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80",
+        thumbnails: [
+          "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80"
+        ],
+        features: [
+          "2.2L SkyActiv-D Turbo Diesel engine",
+          "19 inch alloy wheels",
+          "Bose surround sound system",
+          "Adaptive LED headlights",
+          "Lane keep assist & blind spot monitoring"
+        ]
+      }
+    ];
+
+    let quotationRequests = [
+      {
+        date: "2026-07-24 14:10",
+        name: "David Ochieng",
+        email: "david.ochieng@example.com",
+        phone: "+254 712 345 678",
+        vehicle: "Toyota Land Cruiser Prado V8",
+        budget: 7500000,
+        source: "Direct Import (Japan)",
+        notes: "Looking for 2021 model with sunroof and leather interior package."
+      }
+    ];
+
+    const modelOptions = {
+      "Mazda": ["CX-5", "Demio", "Axela", "Atenza", "CX-8"],
+      "Toyota": ["Harrier", "RAV4", "Land Cruiser", "Premio", "Vitz", "Alphard", "Hilux"],
+      "Subaru": ["Forester", "Outback", "Impreza", "XV", "Legacy"],
+      "Honda": ["Grace Hybrid", "CR-V", "Vezel", "Fit", "Civic"],
+      "Nissan": ["X-Trail", "Note", "Serena", "Dualis", "Navara"],
+      "BMW": ["X3", "X5", "3 Series", "5 Series"],
+      "Mercedes": ["C200", "E220", "GLC250", "GLE350"]
+    };
+
+    function onMakeChange() {
+      const make = document.getElementById('makeSelect').value;
+      const modelSelect = document.getElementById('modelSelect');
+      modelSelect.innerHTML = '<option value="">Any Model</option>';
+      if (make && modelOptions[make]) {
+        modelSelect.disabled = false;
+        modelOptions[make].forEach(model => {
+          modelSelect.innerHTML += `<option value="${model}">${model}</option>`;
+        });
+      } else {
+        modelSelect.disabled = true;
+      }
+    }
+
+    function renderInventory(items) {
+      const grid = document.getElementById('vehicleGrid');
+      const homeGrid = document.getElementById('homeFeaturedGrid');
+      document.getElementById('carCountLabel').innerText = `${items.length} Vehicles Found`;
+
+      const cardsHtml = items.map(car => `
+        <div class="vehicle-card">
+          <div class="card-img-wrap">
+            <img src="${car.img}" alt="${car.make} ${car.model}" class="card-img">
+            <div class="card-badge">${car.condition}</div>
+            <div class="verified-badge"><i class="fa-solid fa-shield-halved"></i> Verified</div>
+          </div>
+          <div class="card-body">
+            <div class="card-trim">${car.make}</div>
+            <h3 class="card-title">${car.year} ${car.model}</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;">${car.trim}</p>
+            <div class="card-price">KES ${car.price.toLocaleString()}</div>
+            
+            <div class="card-specs">
+              <div class="spec-item"><i class="fa-solid fa-road"></i> ${car.mileage.toLocaleString()} KM</div>
+              <div class="spec-item"><i class="fa-solid fa-gears"></i> ${car.transmission}</div>
+              <div class="spec-item"><i class="fa-solid fa-location-dot"></i> ${car.location}</div>
+              <div class="spec-item"><i class="fa-solid fa-palette"></i> ${car.color}</div>
+            </div>
+
+            <div class="card-actions">
+              <button onclick="prefillAndGoQuote('${car.make} ${car.model} (${car.year})')" class="btn btn-primary" style="font-size: 0.78rem;">
+                <i class="fa-solid fa-file-invoice"></i> Request Quote
+              </button>
+              <button onclick="openCarDetailModal(${car.id})" class="btn btn-dl" title="View Full Car CV and Information">
+                <i class="fa-solid fa-file-lines"></i> CV
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      grid.innerHTML = cardsHtml;
+      if (homeGrid) {
+        homeGrid.innerHTML = cardsHtml;
+      }
+    }
+
+    // Opens the detailed car CV information modal matching the attached JPG reference layout
+    function openCarDetailModal(carId) {
+      const car = vehicleInventory.find(c => c.id === carId);
+      if (!car) return;
+
+      const thumbs = car.thumbnails && car.thumbnails.length > 0 ? car.thumbnails : [car.img];
+      
+      const featuresHtml = car.features.map(f => `<li><i class="fa-solid fa-square-check"></i> ${f}</li>`).join('');
+
+      const modalHtml = `
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; padding-right: 40px;">
+          <h2 style="font-size: 1.6rem; color: var(--primary-dark);">${car.make} ${car.model} ${car.year} ${car.color}</h2>
+          <button class="btn btn-primary" style="background: #F59E0B; padding: 8px 16px; font-size: 0.85rem;"><i class="fa-solid fa-star"></i> Compare</button>
+        </div>
+
+        <div class="detail-badges-bar">
+          <span class="d-badge"><i class="fa-solid fa-gauge"></i> ${car.cc}</span>
+          <span class="d-badge"><i class="fa-solid fa-gears"></i> ${car.transmission}</span>
+          <span class="d-badge"><i class="fa-solid fa-road"></i> ${car.mileage.toLocaleString()} km</span>
+          <span class="d-badge"><i class="fa-solid fa-car-side"></i> ${car.condition}</span>
+        </div>
+
+        <div class="car-detail-layout">
+          <div>
+            <div class="detail-gallery-main">
+              <img id="mainDetailImg" src="${thumbs[0]}" alt="${car.model}">
+            </div>
+            <div class="detail-thumbs">
+              ${thumbs.map((t, idx) => `
+                <div class="detail-thumb ${idx === 0 ? 'active-thumb' : ''}" onclick="switchDetailThumb('${t}', this)">
+                  <img src="${t}" alt="thumb">
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="desc-box">
+              <h4 style="margin-bottom: 8px; color: var(--primary-dark);">Description</h4>
+              <p style="font-weight: 600; font-size: 0.9rem; margin-bottom: 8px;">${car.make} ${car.model} (${car.year}) Model</p>
+              <ul class="desc-list">
+                ${featuresHtml}
+              </ul>
+              <div style="margin-top: 16px; font-family: var(--font-heading); font-weight: 700; color: var(--accent-red); font-size: 1.1rem;">
+                SELLING PRICE - KES ${car.price.toLocaleString()}
+              </div>
+            </div>
+
+            <div class="desc-box" style="margin-top: 20px;">
+              <h4 style="margin-bottom: 12px; color: var(--primary-dark);">Car Overview</h4>
+              <div class="overview-grid">
+                <div class="overview-item"><i class="fa-solid fa-car"></i> Make: <strong>${car.make}</strong></div>
+                <div class="overview-item"><i class="fa-solid fa-car-side"></i> Model: <strong>${car.model}</strong></div>
+                <div class="overview-item"><i class="fa-solid fa-calendar"></i> Year: <strong>${car.year}</strong></div>
+                <div class="overview-item"><i class="fa-solid fa-gas-pump"></i> Fuel Type: <strong>petrol</strong></div>
+                <div class="overview-item"><i class="fa-solid fa-circle-check"></i> Condition: <strong>${car.condition}</strong></div>
+                <div class="overview-item"><i class="fa-solid fa-road"></i> Mileage: <strong>${car.mileage.toLocaleString()} km</strong></div>
+                <div class="overview-item"><i class="fa-solid fa-gears"></i> Gearbox: <strong>${car.transmission}</strong></div>
+                <div class="overview-item"><i class="fa-solid fa-gauge-high"></i> Engine Size: <strong>${car.cc}</strong></div>
+                <div class="overview-item"><i class="fa-solid fa-palette"></i> Color: <strong>${car.color}</strong></div>
+                <div class="overview-item"><i class="fa-solid fa-door-open"></i> Doors: <strong>5</strong></div>
+                <div class="overview-item"><i class="fa-solid fa-chair"></i> Seats: <strong>5</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="sidebar-widget">
+              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted);">Selling Price</div>
+              <div class="sidebar-price">KES ${car.price.toLocaleString()}</div>
+              <div class="sidebar-finance">Upfront 10% Financing<br><strong>KES ${(car.price * 0.1).toLocaleString()}/month</strong><br><span style="font-size:0.78rem;">deposit: KES ${(car.price * 0.3).toLocaleString()}</span></div>
+              
+              <button onclick="prefillAndGoQuote('${car.make} ${car.model} (${car.year})')" class="btn btn-primary" style="width: 100%; margin-top: 16px; background-color: #990000;">
+                <i class="fa-solid fa-file-invoice-dollar"></i> Get our financing
+              </button>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px;">
+                <button class="btn btn-secondary" style="font-size: 0.75rem; padding: 10px 4px; text-align: center;"><i class="fa-solid fa-shield"></i> Get insurance</button>
+                <button class="btn btn-secondary" style="font-size: 0.75rem; padding: 10px 4px; text-align: center;"><i class="fa-solid fa-clipboard-check"></i> Request Inspection</button>
+              </div>
+            </div>
+
+            <div class="sidebar-widget">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                <div style="width: 44px; height: 44px; background: var(--accent-red); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                  <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <div>
+                  <h4 style="font-size: 1rem;">${car.seller}</h4>
+                  <p style="font-size: 0.78rem; color: var(--text-muted);"><i class="fa-solid fa-location-dot"></i> ${car.location}</p>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" style="width: 100%; margin-bottom: 8px; background-color: #990000;">
+                <i class="fa-solid fa-phone"></i> Show Contact Number
+              </button>
+              <button class="btn btn-secondary" style="width: 100%; margin-bottom: 8px; font-size: 0.85rem;">
+                <i class="fa-solid fa-user"></i> View Seller Profile
+              </button>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                <button class="btn btn-secondary" style="font-size: 0.8rem;"><i class="fa-solid fa-message"></i> Message</button>
+                <button class="btn btn-primary" style="background-color: #25D366; font-size: 0.8rem;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('modalContentBody').innerHTML = modalHtml;
+      document.getElementById('carDetailModal').classList.add('active');
+    }
+
+    function switchDetailThumb(url, el) {
+      document.getElementById('mainDetailImg').src = url;
+      document.querySelectorAll('.detail-thumb').forEach(t => t.classList.remove('active-thumb'));
+      el.classList.add('active-thumb');
+    }
+
+    function closeCarModal(e) {
+      document.getElementById('carDetailModal').classList.remove('active');
+    }
+
+    function closeCarModalDirect() {
+      document.getElementById('carDetailModal').classList.remove('active');
+    }
+
+    function applyFilters() {
+      const make = document.getElementById('makeSelect').value;
+      const model = document.getElementById('modelSelect').value;
+      const minYear = document.getElementById('minYearSelect').value;
+      const minPrice = document.getElementById('minPriceInput').value;
+      const maxPrice = document.getElementById('maxPriceInput').value;
+      const condition = document.getElementById('conditionSelect').value;
+
+      let filtered = vehicleInventory.filter(car => {
+        if (make && car.make !== make) return false;
+        if (model && car.model !== model) return false;
+        if (minYear && car.year < parseInt(minYear)) return false;
+        if (minPrice && car.price < parseInt(minPrice)) return false;
+        if (maxPrice && car.price > parseInt(maxPrice)) return false;
+        if (condition && car.condition !== condition) return false;
+        return true;
+      });
+
+      renderInventory(filtered);
+    }
+
+    function filterByBrandPage(brand) {
+      switchPage('inventory');
+      document.getElementById('makeSelect').value = brand;
+      onMakeChange();
+      applyFilters();
+    }
+
+    function resetFilters() {
+      document.getElementById('makeSelect').value = "";
+      document.getElementById('modelSelect').value = "";
+      document.getElementById('modelSelect').disabled = true;
+      document.getElementById('minYearSelect').value = "";
+      document.getElementById('minPriceInput').value = "";
+      document.getElementById('maxPriceInput').value = "";
+      document.getElementById('conditionSelect').value = "";
+      renderInventory(vehicleInventory);
+    }
+
+    function prefillAndGoQuote(vehicleName) {
+      switchPage('quotation');
+      document.getElementById('qVehicle').value = vehicleName;
+    }
+
+    function handleQuotationSubmit(event) {
+      event.preventDefault();
+      const now = new Date();
+      const dateStr = now.toISOString().slice(0, 10) + ' ' + now.toTimeString().slice(0, 5);
+      
+      const newQuote = {
+        date: dateStr,
+        name: document.getElementById('qName').value,
+        email: document.getElementById('qEmail').value,
+        phone: document.getElementById('qPhone').value,
+        vehicle: document.getElementById('qVehicle').value,
+        budget: parseInt(document.getElementById('qBudget').value),
+        source: document.getElementById('qSource').value,
+        notes: document.getElementById('qNotes').value || 'None'
+      };
+
+      quotationRequests.unshift(newQuote);
+      updateQuotationsTable();
+      document.getElementById('quotationForm').reset();
+      alert("Your quotation request has been submitted successfully to Chapman Auto administration!");
+      switchPage('home');
+    }
+
+    function handleAdminLogin(event) {
+      event.preventDefault();
+      const user = document.getElementById('adminUser').value;
+      const pass = document.getElementById('adminPass').value;
+
+      if (user === 'admin' && pass === 'admin123') {
+        document.getElementById('adminLoginWrapper').style.display = 'none';
+        document.getElementById('adminDashboardWrapper').style.display = 'block';
+        updateQuotationsTable();
+      } else {
+        alert("Invalid username or password. Please use admin / admin123");
+      }
+    }
+
+    function handleAdminLogout() {
+      document.getElementById('adminDashboardWrapper').style.display = 'none';
+      document.getElementById('adminLoginWrapper').style.display = 'block';
+      document.getElementById('adminUser').value = '';
+      document.getElementById('adminPass').value = '';
+    }
+
+    function switchAdminTab(tabName) {
+      document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.admin-content-pane').forEach(pane => pane.classList.remove('active'));
+
+      if (tabName === 'quotes') {
+        document.querySelector('.admin-tabs button:nth-child(1)').classList.add('active');
+        document.getElementById('tabQuotes').classList.add('active');
+      } else {
+        document.querySelector('.admin-tabs button:nth-child(2)').classList.add('active');
+        document.getElementById('tabInventoryUpload').classList.add('active');
+      }
+    }
+
+    function updateQuotationsTable() {
+      document.getElementById('quoteBadgeCount').innerText = quotationRequests.length;
+      const tbody = document.getElementById('quotationsTableBody');
+      if (quotationRequests.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted);">No quotation requests received yet.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = quotationRequests.map(q => `
+        <tr>
+          <td>${q.date}</td>
+          <td><strong>${q.name}</strong><br><small style="color:var(--text-muted);">${q.email}</small></td>
+          <td>${q.phone}</td>
+          <td><strong>${q.vehicle}</strong></td>
+          <td>KES ${q.budget.toLocaleString()}</td>
+          <td>${q.source}</td>
+          <td><small>${q.notes}</small></td>
+        </tr>
+      `).join('');
+    }
+
+    function handleAddNewItem(event) {
+      event.preventDefault();
+      const imgFileInput = document.getElementById('newItemImgFile');
+      const imgUrl = imgFileInput.files.length > 0 ? URL.createObjectURL(imgFileInput.files[0]) : "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80";
+
+      const rawDesc = document.getElementById('newItemDescList').value;
+      const featuresArray = rawDesc.split(',').map(item => item.trim()).filter(Boolean);
+
+      const newItem = {
+        id: vehicleInventory.length + 1,
+        make: document.getElementById('newItemMake').value,
+        model: document.getElementById('newItemModel').value,
+        trim: document.getElementById('newItemTrim').value,
+        year: parseInt(document.getElementById('newItemYear').value),
+        price: parseInt(document.getElementById('newItemPrice').value),
+        mileage: parseInt(document.getElementById('newItemMileage').value),
+        transmission: document.getElementById('newItemTrans').value,
+        condition: document.getElementById('newItemCond').value,
+        location: document.getElementById('newItemLoc').value,
+        color: document.getElementById('newItemColor').value,
+        cc: document.getElementById('newItemCc').value,
+        seller: document.getElementById('newItemSeller').value,
+        img: imgUrl,
+        thumbnails: [imgUrl, "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80"],
+        features: featuresArray
+      };
+
+      vehicleInventory.unshift(newItem);
+      renderInventory(vehicleInventory);
+      document.getElementById('addItemForm').reset();
+      alert("New vehicle item picture (.jpg) and CV specification details successfully uploaded and published!");
+      switchAdminTab('quotes');
+    }
+
+    window.onload = function() {
+      renderInventory(vehicleInventory);
+    };
+  </script>
 
   <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
 </body>
